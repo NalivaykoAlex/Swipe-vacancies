@@ -16,38 +16,42 @@ class Tinder extends PureComponent {
       slides: [
         {
           id: 1,
-          name: "ALEX",
+          name: "Один",
           desctiprion: "lorem lorem lorem",
           image:
             "http://actlikeaman.org/wp-content/uploads/2013/04/tumblr_inline_mlh4cxiHEr1r61ztt.png"
         },
         {
           id: 2,
-          name: "Ivan",
+          name: "Два",
           desctiprion: "lorem lorem lorem2",
           image: "https://northernheckler.files.wordpress.com/2010/10/work.gif"
         },
         {
           id: 3,
-          name: "3",
+          name: "Три",
           desctiprion: "lorem lorem lorem3",
           image:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnaacb0DOvTxwJZkmfKPORtPIjJrSpGodmeTZ_u9r8yd7OlUw1"
         },
         {
           id: 4,
-          name: "4",
+          name: "Четыре",
           desctiprion: "lorem lorem lorem4",
           image:
             "http://actlikeaman.org/wp-content/uploads/2013/04/tumblr_inline_mlh4cxiHEr1r61ztt.png"
         },
-        { id: 5, name: "5", desctiprion: "lorem lorem lorem5" },
-        { id: 6, name: "6", desctiprion: "lorem lorem lorem6" },
-        { id: 7, name: "7", desctiprion: "lorem lorem lorem7" }
+        { id: 5, name: "Пять", desctiprion: "lorem lorem lorem5" },
+        { id: 6, name: "Шесть", desctiprion: "lorem lorem lorem6" },
+        { id: 7, name: "Семь", desctiprion: "lorem lorem lorem7" }
       ],
       likes: [],
       dislikes: []
     };
+  }
+
+  componentWillMount() {
+    this.props.FetchData();
   }
 
   getParams = () => {
@@ -71,12 +75,12 @@ class Tinder extends PureComponent {
   };
 
   render() {
-    console.log(this.state, "STATE");
-    console.log(this.props, "props");
     const { likes, dislikes } = this.state;
     const { initialized, loading, data: { vacancies } } = this.props.store;
     if (loading && !initialized) return <Loader active />;
     else if (!vacancies) return <span />;
+    console.log(this.state, "STATE");
+    console.log(this.props, "props");
     return (
       <div>
         <Dimmer active={loading} inverted>
@@ -96,12 +100,20 @@ class Tinder extends PureComponent {
           ))}
         </ReactSwipe>
         <div>
-          <Button type="button" onClick={this.dislike}>
-            <Icon name="dislike outline" color="red" onClick={this.dislike} />
-          </Button>
-          <Button type="button" onClick={this.like}>
-            <Icon name="like outline" color="green" />
-          </Button>
+          <Icon
+            name="dislike outline"
+            size="big"
+            color="red"
+            circular={true}
+            onClick={this.dislike}
+          />
+          <Icon
+            name="like outline"
+            size="big"
+            color="green"
+            circular={true}
+            onClick={this.like}
+          />
         </div>
       </div>
     );
