@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import ReactSwipe from "react-swipe";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { Image, Dimmer, Loader, Button, Icon } from "semantic-ui-react";
 
 import { FetchData } from "../../actions";
@@ -62,20 +63,20 @@ class Tinder extends PureComponent {
 
   like = () => {
     const { likes } = this.state;
-
     likes.push(this.getParams());
+    localStorage.setItem("likes", JSON.stringify(likes));
     this.refs.reactSwipe.next();
   };
 
   dislike = () => {
     const { dislikes } = this.state;
-
     dislikes.push(this.getParams());
+    localStorage.setItem('dislikes', JSON.stringify(dislikes));
     this.refs.reactSwipe.next();
   };
 
   render() {
-    const { likes, dislikes } = this.state;
+    const { likes, dislikes, slides } = this.state;
     const { initialized, loading, data: { vacancies } } = this.props.store;
     if (loading && !initialized) return <Loader active />;
     else if (!vacancies) return <span />;
@@ -91,7 +92,7 @@ class Tinder extends PureComponent {
           className="carousel"
           swipeOptions={{ continuous: true }}
         >
-          {this.state.slides.map(slide => (
+          {slides.map(slide => (
             <div key={slide.id}>
               <h2>{slide.name}</h2>
               <p>{slide.desctiprion}</p>

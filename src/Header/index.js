@@ -15,7 +15,7 @@ export default () => (
     <br />
     {/* <Input type="text" />
     <br /> */}
-    <div style={{ fontSize: "35px", float: "right", margin: "auto" }}>
+    <div style={{ fontSize: "30px", float: "right", margin: "auto" }}>
       {links.map((link, index) => <LinkCard key={index} link={link} />)}
     </div>
     <br />
