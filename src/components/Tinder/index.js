@@ -17,34 +17,28 @@ class Tinder extends PureComponent {
       slides: [
         {
           id: 1,
-          name: "Один",
-          desctiprion: "lorem lorem lorem",
-          image:
-            "http://actlikeaman.org/wp-content/uploads/2013/04/tumblr_inline_mlh4cxiHEr1r61ztt.png"
+          name: "Оператор call-центра",
+          price: "20 000 — 30 000 руб.",
+          company: "ООО Гранд Авто"
         },
         {
           id: 2,
-          name: "Два",
-          desctiprion: "lorem lorem lorem2",
-          image: "https://northernheckler.files.wordpress.com/2010/10/work.gif"
+          name: "Водитель в Яндекс Такси на любом авто",
+          price: "80 000 — 100 000 руб.",
+          company: "Яндекс Такси"
         },
         {
           id: 3,
-          name: "Три",
-          desctiprion: "lorem lorem lorem3",
-          image:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnaacb0DOvTxwJZkmfKPORtPIjJrSpGodmeTZ_u9r8yd7OlUw1"
+          name: "Менеджер по работе с клиентами",
+          price: "20 000 — 70 000 руб.",
+          company: "ПАО МТС"
         },
         {
           id: 4,
-          name: "Четыре",
-          desctiprion: "lorem lorem lorem4",
-          image:
-            "http://actlikeaman.org/wp-content/uploads/2013/04/tumblr_inline_mlh4cxiHEr1r61ztt.png"
-        },
-        { id: 5, name: "Пять", desctiprion: "lorem lorem lorem5" },
-        { id: 6, name: "Шесть", desctiprion: "lorem lorem lorem6" },
-        { id: 7, name: "Семь", desctiprion: "lorem lorem lorem7" }
+          name: "Администратор-регистратор",
+          price: "от 18 000 руб.",
+          company: "Центр красоты и здоровья 'Грация'"
+        }
       ],
       likes: [],
       dislikes: []
@@ -71,7 +65,7 @@ class Tinder extends PureComponent {
   dislike = () => {
     const { dislikes } = this.state;
     dislikes.push(this.getParams());
-    localStorage.setItem('dislikes', JSON.stringify(dislikes));
+    localStorage.setItem("dislikes", JSON.stringify(dislikes));
     this.refs.reactSwipe.next();
   };
 
@@ -94,9 +88,13 @@ class Tinder extends PureComponent {
         >
           {slides.map(slide => (
             <div key={slide.id}>
-              <h2>{slide.name}</h2>
-              <p>{slide.desctiprion}</p>
-              <Image src={slide.image} />
+              <h3>Должность:</h3> {slide.name}
+              <h3>Заработная плата:</h3> {slide.price}
+              <h3>Компания:</h3> {slide.company}
+              <Image
+                src="../static/images/notes.svg"
+                style={{ height: "100px", width: "100px" }}
+              />
             </div>
           ))}
         </ReactSwipe>
