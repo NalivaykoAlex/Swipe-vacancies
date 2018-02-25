@@ -8,7 +8,7 @@ export default () => {
   return (
     <div>
       {check && <h3> Вы ничего не отметили </h3>}
-      {!check && <h3>Список не понравившихся вакансий</h3> &&
+      {!check &&
         dislikes.map(item =>
           item.map(item => (
             <ul key={item.id}>
