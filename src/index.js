@@ -10,6 +10,10 @@ import reducer from "./reducers";
 import registerServiceWorker from "./registerServiceWorker";
 import HomePage from "./containers/HomePage";
 
+import jquery from "../public/static/js/jquery.min.js";
+import transform2d from "../public/static/js/jquery.transform2d.js";
+import jTinder from "../public/static/js/jquery.jTinder.js";
+
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 render(

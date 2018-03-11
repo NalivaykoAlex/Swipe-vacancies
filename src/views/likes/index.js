@@ -13,7 +13,7 @@ class Likes extends Component {
       <div>
         {check && <h3> Вы ничего не отметили </h3>}
         {!check &&
-          likes.map((item, index)=> (
+          likes.map(item => item.map((item, index) => (
             <Card
               style={{ width: "100%", height: "100%", top: "0px", left: "0px" }}
               key={index}
@@ -21,7 +21,7 @@ class Likes extends Component {
               meta={item.price}
               description={item.description}
             />
-          ))}
+          )))}
       </div>
     );
   }

@@ -1,5 +1,6 @@
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const webpack = require("webpack");
 
 const extractCSS = new ExtractTextPlugin("stylesheets/[name]-one.css");
 
@@ -42,5 +43,11 @@ module.exports = {
       }
     ]
   },
-  plugins: [extractCSS]
+  plugins: [
+    extractCSS,
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    })
+  ]
 };

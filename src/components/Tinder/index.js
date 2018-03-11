@@ -1,30 +1,72 @@
 import React, { Component } from "react";
 import Cards, { Card } from "react-swipe-card";
 import { connect } from "react-redux";
-import { Image, Dimmer, Loader } from "semantic-ui-react";
+import Button, { Image, Dimmer, Loader } from "semantic-ui-react";
 
 import { FetchData, Pushlikes, PushDislikes } from "../../actions";
 
 class Tinder extends Component {
-
   componentWillMount() {
     this.props.FetchData();
   }
-  
-  like = like => {
-    this.props.Pushlikes(like);
-    localStorage.setItem("likes", JSON.stringify(this.props.store.likes));
-  };
-  
-  dislike = dislike => {
-    this.props.PushDislikes(dislike)
-    localStorage.setItem("dislikes", JSON.stringify(this.props.store.dislikes));
-  };
+
+  componentDidMount() {
+    /**
+     * jTinder initialization
+     */
+    const { data: { slides }, likes, dislikes } = this.props.store;
+    const PushDislikes = this.props.PushDislikes;
+    const Pushlikes = this.props.Pushlikes;
+    // console.log(likes, dislikes, 'WTF')
+    // console.log(this.props.store, 'STORE')
+
+    $("#tinderslide").jTinder({
+      // dislike callback
+      onDislike: function(item) {
+        const dislike = slides.filter((items, index) => index === item.index());
+        PushDislikes(dislike);
+        // localStorage.setItem("dislikes", JSON.stringify(dislikes));
+      },
+      // like callback
+      onLike: function(item) {
+        const like = slides.filter((items, index) => index === item.index());
+        Pushlikes(like);
+        // console.log("Hooooo!");
+      },
+      animationRevertSpeed: 200,
+      animationSpeed: 400,
+      threshold: 1,
+      likeSelector: ".like",
+      dislikeSelector: ".dislike"
+    });
+
+    /**
+     * Set button action to trigger jTinder like & dislike.
+     */
+    $(".actions .like, .actions .dislike").click(function(e) {
+      e.preventDefault();
+      $("#tinderslide").jTinder($(this).attr("class"));
+    });
+    // Jquery here $(...)...
+  }
+
+//   like = like => {
+//     this.props.Pushlikes(like);
+//     localStorage.setItem("likes", JSON.stringify(this.props.store.likes));
+//   };
+
+//   dislike = dislike => {
+//     this.props.PushDislikes(dislike);
+//     localStorage.setItem("dislikes", JSON.stringify(this.props.store.dislikes));
+//   };
+
 
   render() {
     const { data: { initialized, loading, slides } } = this.props.store;
     if (loading && !initialized) return <Loader active />;
     else if (!slides) return <span />;
+
+    console.log(this.props.store)
 
     return (
       <div>
@@ -32,27 +74,28 @@ class Tinder extends Component {
           <Loader />
         </Dimmer>
         <div>
-          <Cards className="master-root">
-            {slides.map(slide => (
-              <Card
-                className="card"
-                key={slide.id}
-                onSwipeLeft={() => this.dislike(slide)}
-                onSwipeRight={() => this.like(slide)}
-              >
-                <div key={slide.id}>
-                  <h3>Должность:</h3> {slide.name}
-                  <h3>Заработная плата:</h3> {slide.price}
-                  <h3>Компания:</h3> {slide.company}
-                  <h3>Описание:</h3> {slide.description}
-                  <Image
-                    src="../static/images/notes.svg"
-                    style={{ height: "70px", marginTop: "15px" }}
-                  />
-                </div>
-              </Card>
-            ))}
-          </Cards>
+          <div className="wrap">
+            <div id="tinderslide">
+              <ul>
+                {slides.map((slide, index) => (
+                  <li className="pane1" key={index}>
+                    <p>{slide.name}</p>
+                    <h2>{slide.price}</h2>
+                    <div className="like" />
+                    <div className="dislike" />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="actions">
+            <a href="#" className="dislike">
+              <i />
+            </a>
+            <a href="#" className="like">
+              <i />
+            </a>
+          </div>
         </div>
       </div>
     );

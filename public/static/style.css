@@ -105,3 +105,17 @@ h1, h2 {
   margin-left: 50%;
  } */
 
+
+ /* @keyframes swipe-left {
+    to {
+        transform: rotate(-13deg) translate3d(-100%, 0, 0);
+        opacity: 0;
+    }
+}
+
+@keyframes swipe-right {
+    to {
+        transform: rotate(13deg) translate3d(100%, 0, 0);
+        opacity: 0;
+    }
+} */
