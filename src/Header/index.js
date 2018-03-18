@@ -18,7 +18,7 @@ class Header extends Component {
         <Dropdown icon="align justify" style={{ fontSize: "30px" }}>
           <Dropdown.Menu className="left">
             <Dropdown.Item>
-              <Menu.Item name="dislike outline">
+              <Menu.Item name="dislike outline" style={{marginBottom: "10px"}}>
                 <Link to="/dislikes">
                   <Icon color="red" name="dislike outline" />
                   <Label color="red">{dislike}</Label>

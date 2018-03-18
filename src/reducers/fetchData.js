@@ -1,5 +1,5 @@
 import { FETCH_DATA } from "../constants";
-
+import bigdata from "../bigdata"
 const initialState = {
   slides: [
     {
@@ -33,7 +33,8 @@ const initialState = {
   ],
   initialized: false,
   loading: true,
-  vacancies: []
+  vacancies: [],
+  devVacancies: bigdata
 };
 
 export default function vacancies(state = initialState, action) {

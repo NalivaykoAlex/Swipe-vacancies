@@ -13,3 +13,15 @@ export async function fetchAPI(url, param='') {
     return data
   }
 }
+
+// export default async (url, param = "") => {
+//    const params = qs.stringify(param);
+//   try {
+//     const response = await fetch(`${url}${params}`)
+//         .then(response => response.json());
+
+//         return response;
+//   } catch (e) {
+//     return false;
+//   }
+// };

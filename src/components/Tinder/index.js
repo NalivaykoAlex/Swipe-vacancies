@@ -10,20 +10,21 @@ class Tinder extends Component {
   }
 
   componentDidUpdate() {
-    const { vacancies, likes, dislikes } = this.props.store.data;
+    const { vacancies, likes, dislikes, devVacancies } = this.props.store.data;
+    // const { vacancies, likes, dislikes } = this.props.store.data;
     const PushDislikes = this.props.PushDislikes;
     const Pushlikes = this.props.Pushlikes;
 
     $("#tinderslide").jTinder({
       onDislike: function(item) {
-        const dislike = vacancies.find(
-          (items, index) => index === item.index()
-        );
+        const dislike = devVacancies.find((items, index) => index === item.index());
+        // const dislike = vacancies.find((items, index) => index === item.index());
         PushDislikes(dislike);
       },
 
       onLike: function(item) {
-        const like = vacancies.find((items, index) => index === item.index());
+        const like = devVacancies.find((items, index) => index === item.index());
+        // const like = vacancies.find((items, index) => index === item.index());
         Pushlikes(like);
       },
 
@@ -36,12 +37,11 @@ class Tinder extends Component {
   }
 
   render() {
-    const { initialized, loading, slides, vacancies } = this.props.store.data;
+    const { initialized, loading, slides, vacancies, devVacancies } = this.props.store.data;
     if (loading && !initialized) return <Loader active />;
-    else if (!vacancies) return <span />;
+    else if (!devVacancies) return <span />;
 
-    return (
-      <div>
+    return <div>
         <Dimmer active={loading} inverted>
           <Loader />
         </Dimmer>
@@ -49,7 +49,7 @@ class Tinder extends Component {
           <div className="wrap">
             <div id="tinderslide">
               <ul>
-                {vacancies.map((item, index) => (
+                {devVacancies.map((item, index) => (
                   <li className="pane1" key={index}>
                     <p>{item.header}</p>
                     <h2>{item.salary}</h2>
@@ -61,8 +61,7 @@ class Tinder extends Component {
             </div>
           </div>
         </div>
-      </div>
-    );
+      </div>;
   }
 }
 

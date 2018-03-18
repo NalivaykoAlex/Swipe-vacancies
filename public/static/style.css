@@ -3,3 +3,8 @@
   align-items: flex-end;
   justify-content: space-around;
 }
+
+.text-not-items {
+  text-align: center;
+}
+

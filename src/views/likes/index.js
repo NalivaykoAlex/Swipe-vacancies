@@ -1,17 +1,17 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Card, Button } from "semantic-ui-react";
 
 import { isEmpty } from "lodash";
 
-class Likes extends Component {
+class Likes extends PureComponent {
   render() {
     const { likes } = this.props.store;
     const check = isEmpty(likes);
 
     return (
       <div>
-        {check && <h3> Вы ничего не отметили </h3>}
+        {check && <h3 className="text-not-items"> Вы ничего не отметили </h3>}
         {!check &&
           likes.map((item, index) => (
             <Card
@@ -20,8 +20,7 @@ class Likes extends Component {
               header={item.header}
               meta={item.salary}
             />
-          ))
-        }
+          ))}
       </div>
     );
   }
