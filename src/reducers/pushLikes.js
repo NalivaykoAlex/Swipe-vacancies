@@ -1,6 +1,6 @@
 import { PUSH_LIKES } from "../constants";
 
-const initialState = {};
+const initialState = [];
 
 export default function likes(state = initialState, action) {
   if (action.type === PUSH_LIKES) {

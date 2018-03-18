@@ -1,8 +1,5 @@
 const path = require("path");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const webpack = require("webpack");
-
-const extractCSS = new ExtractTextPlugin("stylesheets/[name]-one.css");
 
 module.exports = {
   devtool: "source-map",
@@ -23,28 +20,12 @@ module.exports = {
         loader: "babel-loader"
       },
       {
-        test: /\.css$/,
-        use: extractCSS.extract({
-          fallback: "style-loader",
-          use: [
-            {
-              loader: "css-loader",
-              options: {
-                modules: true,
-                localIdentName: "[local]_[hash:base64:5]"
-              }
-            }
-          ]
-        })
-      },
-      {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use: ["url-loader?limit=10000", "img-loader"]
       }
     ]
   },
   plugins: [
-    extractCSS,
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery"

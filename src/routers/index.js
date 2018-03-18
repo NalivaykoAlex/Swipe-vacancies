@@ -7,7 +7,7 @@ import Dislikes from "../views/dislikes";
 
 export default () => (
   <Switch>
-    <Route exact path="/" component={Tinder} />
+    <Route exact path="/swipe/" component={Tinder} />
     <Route path="/likes" component={Likes} />
     <Route path="/dislikes" component={Dislikes} />
   </Switch>

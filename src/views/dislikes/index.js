@@ -12,13 +12,12 @@ class Dislikes extends Component {
       <div>
         {check && <h3> Вы ничего не отметили </h3>}
         {!check &&
-          dislikes.map(item => item.map((item, index) => (
+          dislikes.map(((item, index) => (
             <Card
               style={{ width: "100%", height: "100%", top: "0px", left: "0px" }}
               key={index}
-              header={item.name}
-              meta={item.price}
-              description={item.description}
+              header={item.header}
+              meta={item.salary}
             />
           )))}
       </div>

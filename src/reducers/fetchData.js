@@ -30,7 +30,10 @@ const initialState = {
       company: "Центр красоты и здоровья 'Грация'",
       description: "Lorem lorem lorem lorem lorem lorem"
     }
-  ]
+  ],
+  initialized: false,
+  loading: true,
+  vacancies: []
 };
 
 export default function vacancies(state = initialState, action) {
@@ -38,7 +41,8 @@ export default function vacancies(state = initialState, action) {
     return {
       ...state,
       initialized: action.initialized,
-      loading: action.loading
+      loading: action.loading,
+      vacancies: action.vacancies,
     };
   }
   return state;
